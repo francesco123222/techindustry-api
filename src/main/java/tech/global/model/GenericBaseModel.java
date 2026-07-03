@@ -10,7 +10,7 @@ import java.io.Serializable;
 
 @Data
 @MappedSuperclass
-public class GenericBaseModel <T extends Serializable> implements Serializable {
+public class GenericBaseModel <T extends Serializable> implements IGenericBaseModel {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

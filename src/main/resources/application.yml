@@ -6,3 +6,8 @@ spring:
     properties:
       hibernate:
         default_schema: sch_techindustry
+
+api:
+  security:
+    token:
+      secret: "Z3IuMyyMse"

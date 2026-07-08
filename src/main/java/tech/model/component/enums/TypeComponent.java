@@ -1,4 +1,4 @@
-package tech.model;
+package tech.model.component.enums;
 
 public enum TypeComponent {
     // Eletrônicos

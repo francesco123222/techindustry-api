@@ -7,31 +7,30 @@ import tech.global.model.IGenericBaseModel;
 
 import java.io.Serializable;
 
-public abstract class GenericComponenteService<R extends JpaRepository<E, T>, E extends IGenericBaseModel, T extends Serializable>
-        implements IComponenteService<E, T> {
+public abstract class GenericUserService<R extends JpaRepository<E, T>, E extends IGenericBaseModel, T extends Serializable>
+        implements IUsersService<E, T> {
 
     @Autowired
     public R repository;
 
-    // Cadastrar
     @Transactional(rollbackFor = Exception.class)
-    public E incluir(E componente) {
-        return repository.save(componente);
+    public E cadastrarUsuario(E usuario) {
+        return repository.save(usuario);
     }
 
     @Transactional(rollbackFor = Exception.class)
-    public E atualizar(T id, E componente) {
+    public E atualizar(T id, E  usuario) {
 
-        return repository.save(componente);
+        return repository.save(usuario);
     }
 
     @Transactional(rollbackFor = Exception.class)
     public void deletar(T id) {
         if (!repository.existsById(id)) {
-            throw new RuntimeException("Registro não encontrado para exclusão com o ID: " + id);
+            throw new RuntimeException("Usuário não encontrado para exclusão com o ID: " + id);
         }
 
-       repository.deleteById(id);
+        repository.deleteById(id);
     }
 
 }

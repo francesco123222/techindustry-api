@@ -1,9 +1,9 @@
-package tech.dto;
+package tech.dto.component;
 
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
-import tech.model.AreaComponent;
-import tech.model.TypeComponent;
+import tech.model.component.enums.AreaComponent;
+import tech.model.component.enums.TypeComponent;
 
 import java.math.BigDecimal;
 

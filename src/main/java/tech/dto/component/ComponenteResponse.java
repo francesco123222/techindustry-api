@@ -1,8 +1,8 @@
-package tech.dto;
+package tech.dto.component;
 
-import tech.model.AreaComponent;
-import tech.model.Componente;
-import tech.model.TypeComponent;
+import tech.model.component.enums.AreaComponent;
+import tech.model.component.Componente;
+import tech.model.component.enums.TypeComponent;
 
 import java.math.BigDecimal;
 

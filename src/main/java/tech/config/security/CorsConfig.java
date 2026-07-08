@@ -14,19 +14,6 @@ import java.util.List;
 @Configuration
 public class CorsConfig {
 
-    @Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        http
-                // Diz ao Spring Security para usar o CorsConfigurationSource que definimos abaixo
-                .cors(Customizer.withDefaults())
-                .csrf(csrf -> csrf.disable())
-                .authorizeHttpRequests(auth -> auth
-                        .anyRequest().permitAll()
-                );
-
-        return http.build();
-    }
-
     // ESTE BEAN É OBRIGATÓRIO para o Customizer.withDefaults() funcionar com o @CrossOrigin
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {

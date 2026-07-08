@@ -1,19 +1,18 @@
-package tech.controller;
+package tech.controller.component;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.web.PageableHandlerMethodArgumentResolver;
 import org.springframework.http.ResponseEntity;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.web.bind.annotation.*;
-import tech.dto.ComponenteRequest;
-import tech.dto.ComponenteResponse;
+import tech.dto.component.ComponenteRequest;
+import tech.dto.component.ComponenteResponse;
 import tech.global.controller.GenericComponenteRequestController;
-import tech.model.Componente;
-import tech.service.ComponenteService;
-import tech.utils.DatabaseUtils;
+import tech.model.component.Componente;
+import tech.service.component.ComponenteService;
+import tech.utils.component.DatabaseUtils;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -26,7 +25,7 @@ public class ComponenteControllerManual extends GenericComponenteRequestControll
     @Autowired
     private JdbcTemplate jdbcTemplate;
 
-    @PostMapping("/cadastrar")
+    @PostMapping("/cadastrar-componente")
     @Operation(description = "Cadastrar componente.")
     public ResponseEntity<ComponenteResponse> cadastrarComponente(
             @RequestBody @Valid ComponenteRequest request) {

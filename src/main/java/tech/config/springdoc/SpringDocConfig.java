@@ -1,10 +1,8 @@
 package tech.config.springdoc;
 
 import io.swagger.v3.oas.annotations.enums.SecuritySchemeType;
-import io.swagger.v3.oas.annotations.security.OAuthFlow;
-import io.swagger.v3.oas.annotations.security.OAuthFlows;
-import io.swagger.v3.oas.annotations.security.OAuthScope;
-import io.swagger.v3.oas.annotations.security.SecurityScheme;
+import io.swagger.v3.oas.annotations.security.*;
+import io.swagger.v3.oas.models.security.SecurityRequirement;
 import io.swagger.v3.oas.models.OpenAPI;
 import io.swagger.v3.oas.models.info.Info;
 import io.swagger.v3.oas.models.info.License;
@@ -12,20 +10,20 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
-@SecurityScheme(name = "security_authorization",
-        type = SecuritySchemeType.OAUTH2,
-        flows = @OAuthFlows(authorizationCode = @OAuthFlow(
-                authorizationUrl = "${sistema.springdoc-auth-flow-authorization-url}",
-                tokenUrl = "${sistema.springdoc-auth-flow-token-url}",
-                scopes = {
-                        @OAuthScope(name = "openid", description = "OPENID")
-                }
-        )))
+@SecurityScheme(
+        name = "bearerAuth",
+        type = SecuritySchemeType.HTTP,
+        scheme = "bearer",
+        bearerFormat = "JWT"
+        )
 public class SpringDocConfig {
 
     @Bean
     public OpenAPI openAPI() {
+        final String securitySchemeName = "bearerAuth";
+
         return new OpenAPI()
+                .addSecurityItem(new SecurityRequirement().addList(securitySchemeName))
                 .info(new Info()
                         .title("TECH API")
                         .version("1.0")
@@ -34,7 +32,6 @@ public class SpringDocConfig {
                                 .name("Apache 2.0")
                                 .url("http://springdoc.com")
                         )
-
                 );
     }
 }

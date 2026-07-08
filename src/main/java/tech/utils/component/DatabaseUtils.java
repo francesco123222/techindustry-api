@@ -1,8 +1,8 @@
-package tech.utils;
+package tech.utils.component;
 
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
-import tech.model.Componente;
+import tech.model.component.Componente;
 
 import java.util.List;
 

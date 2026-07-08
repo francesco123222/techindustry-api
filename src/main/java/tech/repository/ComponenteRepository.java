@@ -2,9 +2,9 @@ package tech.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
-import tech.model.AreaComponent;
-import tech.model.Componente;
-import tech.model.TypeComponent;
+import tech.model.component.enums.AreaComponent;
+import tech.model.component.Componente;
+import tech.model.component.enums.TypeComponent;
 import tech.repository.query.ComponenteRepositoryCustom;
 
 import java.util.List;

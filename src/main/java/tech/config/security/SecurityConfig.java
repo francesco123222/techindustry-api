@@ -50,11 +50,18 @@ public class SecurityConfig {
 
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
 
+                .headers(headers -> headers
+                        .contentSecurityPolicy(csp -> csp
+                                .policyDirectives("default-src 'self'; connect-src 'self' http://localhost:4200  ws://localhost:4200;")
+                        )
+                )
+
                 .authorizeHttpRequests(authorize -> authorize
                         .requestMatchers(HttpMethod.POST, "/api/cadastrar-usuario").permitAll()
                         .requestMatchers(HttpMethod.POST, "/api/cadastrar-admin").permitAll()
                         .requestMatchers(HttpMethod.POST, "/auth/login").permitAll()
                         .requestMatchers("/v3/api-docs/**", "/swagger-ui/**", "/swagger-ui.html").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/api/status").permitAll()
 
                         .anyRequest().authenticated()
                 )

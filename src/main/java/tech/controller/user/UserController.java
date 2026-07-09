@@ -25,7 +25,7 @@ public class UserController extends GenericUserController<UserService, User, Lon
     public ResponseEntity<UserResponse> cadastrarUsuario(
             @RequestBody @Valid UserRequest request) {
 
-        UserResponse response = service.cadastrarUsuario(request);
+        UserResponse response = service.cadastrarUsuario(request, UserRole.USER);
 
         return ResponseEntity.ok(response);
     }

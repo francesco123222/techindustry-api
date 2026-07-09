@@ -6,6 +6,7 @@ import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import tech.dto.component.ComponenteRequest;
 import tech.dto.component.ComponenteResponse;
@@ -47,7 +48,6 @@ public class ComponenteControllerManual extends GenericComponenteRequestControll
 
 
         return ResponseEntity.ok(response);
-
     }
 
     @GetMapping("/componente/{id}")

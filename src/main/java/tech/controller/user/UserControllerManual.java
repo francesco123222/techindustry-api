@@ -32,7 +32,7 @@ public class UserControllerManual extends GenericUserController<UserService, Use
     public ResponseEntity<UserResponse> cadastrarUsuario(
             @RequestBody @Valid UserRequest request) {
 
-        UserResponse response = service.cadastrarUsuario(request);
+        UserResponse response = service.cadastrarUsuario(request, UserRole.USER);
 
         return ResponseEntity.ok(response);
     }

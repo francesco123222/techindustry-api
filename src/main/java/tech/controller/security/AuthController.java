@@ -35,8 +35,9 @@ public class AuthController {
 
             User userLogado = (User) authentication.getPrincipal();
             String tokenJwt = tokenService.gerarToken(userLogado);
+            String role = userLogado.getRole().name();
 
-            return ResponseEntity.ok(new TokenResponse(tokenJwt));
+            return ResponseEntity.ok(new TokenResponse(tokenJwt, role));
         } catch (Exception e) {
             System.out.println("ERRO REAL NO LOGIN: " + e.getMessage());
             e.printStackTrace();

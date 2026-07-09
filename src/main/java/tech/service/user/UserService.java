@@ -28,14 +28,14 @@ public class UserService extends GenericUserService<UserRepository, User, Long> 
     private final PasswordEncoder passwordEncoder;
 
     @Transactional
-    public UserResponse cadastrarUsuario(UserRequest request) {
+    public UserResponse cadastrarUsuario(UserRequest request, UserRole role) {
         validarCadastroUnico(request.usuario(), request.cpf());
 
         User user =  User.builder()
                 .usuario(request.usuario())
                 .cpf(request.cpf())
                 .senha(request.senha())
-                .role(UserRole.USER)
+                .role(role)
                 .build();
 
         User userSalvo = this.salvarUsuario(user);

@@ -52,16 +52,35 @@ public class SecurityConfig {
 
                 .headers(headers -> headers
                         .contentSecurityPolicy(csp -> csp
-                                .policyDirectives("default-src 'self'; connect-src 'self' http://localhost:4200  ws://localhost:4200;")
+                                .policyDirectives("default-src 'self'; " +
+                                        "script-src 'self'; " +
+                                        "style-src 'self' 'unsafe-inline'; " +
+                                        "connect-src 'self' http://localhost:4200 ws://localhost:4200;")
                         )
                 )
 
                 .authorizeHttpRequests(authorize -> authorize
+
+                        // ARQUIVOS ESTÁTICOS (CSS)
+                        .requestMatchers("/css/**", "/js/**", "/images/**").permitAll()
+
+                        // CADASTRO E AUTENTICAÇÃO
                         .requestMatchers(HttpMethod.POST, "/api/cadastrar-usuario").permitAll()
                         .requestMatchers(HttpMethod.POST, "/api/cadastrar-admin").permitAll()
                         .requestMatchers(HttpMethod.POST, "/auth/login").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/auth/admin").permitAll()
+
+                        // SWAGGER
                         .requestMatchers("/v3/api-docs/**", "/swagger-ui/**", "/swagger-ui.html").permitAll()
+
+                        // DEMAIS ROTAS
                         .requestMatchers(HttpMethod.GET, "/api/status").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/api/main").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/api/main/editar/{id}").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/api/main/editar").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/api/main/excluir/{id}").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/api/main/excluir").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/api/index").permitAll()
 
                         .anyRequest().authenticated()
                 )

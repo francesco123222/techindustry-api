@@ -19,7 +19,7 @@ import tech.utils.user.DatabaseUtils;
 import java.util.List;
 import java.util.stream.Collectors;
 
-@Tag(name = "Cadastrar Usuarios")
+@Tag(name = "Cadastrar Usuários")
 @RestController
 @RequestMapping("/api")
 public class UserControllerManual extends GenericUserController<UserService, User, Long> {
@@ -71,7 +71,7 @@ public class UserControllerManual extends GenericUserController<UserService, Use
 
     @PutMapping("/atualizar-usuario/{id}")
     @PreAuthorize("hasRole('ADMIN')")
-    @Operation(description = "Atualizar usuário.")
+    @Operation(description = "Atualizar usuário pelo id.")
     public ResponseEntity<UserResponse> atualizarUsuario(@PathVariable Long id, @RequestBody @Valid UserRequest request) {
         UserResponse response = service.atualizar(id, request);
 
@@ -80,11 +80,11 @@ public class UserControllerManual extends GenericUserController<UserService, Use
 
     @DeleteMapping("/deletar-usuario/{id}")
     @PreAuthorize("hasRole('ADMIN')")
-    @Operation(description = "Deletar usuário.")
+    @Operation(description = "Deletar usuário pelo id.")
     public ResponseEntity<?> deletarUsuario(@PathVariable Long id) {
         service.deletar(id);
 
-        return ResponseEntity.ok("Usuário excluído com sucesso");
+        return ResponseEntity.ok("Usuário excluído com sucesso.");
     }
 
 }

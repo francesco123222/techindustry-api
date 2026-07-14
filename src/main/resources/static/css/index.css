@@ -1,0 +1,260 @@
+/* ==========================================================================
+   CONFIGURAÇÕES GERAIS E LAYOUT (Mantendo seu alinhamento original)
+   ========================================================================== */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f8fafc;
+    color: #1e293b;
+}
+
+.header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 50px;
+    background-color: #0f172a;
+    color: #ffffff;
+    padding: 24px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    max-width: 1140px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.header h1 span {
+    color: #38bdf8;
+}
+
+.main_page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.tables {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: -15px;
+    width: 100%;
+}
+
+.tables h1 {
+    font-size: 22px;
+    color: #0f172a;
+    border-bottom: 2px solid #e2e8f0;
+    padding-bottom: 6px;
+    margin-top: 40px;
+    margin-bottom: 10px;
+    width: 100%;
+    text-align: center;
+}
+
+.tables h3 {
+    margin-top: -10px;
+    font-size: 14px;
+    color: #64748b;
+    margin-bottom: 10px;
+    font-weight: 400;
+}
+
+.main_page > a {
+    display: inline-block;
+    color: #0284c7;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.main_page > a:hover {
+    text-decoration: underline;
+}
+
+/* ==========================================================================
+   ESTILIZAÇÃO BASE DAS TABELAS
+   ========================================================================== */
+.tables table {
+    margin-top: 10px;
+    width: 100%;
+    max-width: 1000px;
+    border-collapse: collapse;
+    background-color: #ffffff;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+    border-radius: 8px;
+    overflow: hidden;
+    margin-bottom: 30px;
+}
+
+th {
+    background-color: #f1f5f9;
+    color: #475569;
+    font-weight: 600;
+    font-size: 13px;
+    text-align: left;
+    padding: 14px 16px;
+    border-bottom: 2px solid #cbd5e1;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+td {
+    padding: 14px 16px;
+    font-size: 14px;
+    color: #334155;
+    border-bottom: 1px solid #e2e8f0;
+}
+
+tbody tr:nth-child(even) {
+    background-color: #f8fafc;
+}
+
+tbody tr:hover {
+    background-color: #f1f5f9;
+}
+
+/* ==========================================================================
+   REGRAS ESPECÍFICAS DE ALINHAMENTO E PROPORÇÃO (CSS Avançado)
+   ========================================================================== */
+/* Correção para a Lista de Tabelas (Transformar em Badges horizontais) */
+.tables table:first-of-type {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    justify-content: center;
+    background-color: transparent;
+    box-shadow: none;
+    margin-top: 5px;
+}
+
+.tables table:first-of-type tr,
+.tables table:first-of-type td {
+    display: inline-block;
+    padding: 6px 12px;
+    background-color: #e2e8f0;
+    color: #475569;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: 500;
+    border: none;
+}
+
+/* Alinhamento de preços à direita (Padrão financeiro) */
+th:last-child, td:last-child {
+    text-align: right;
+}
+
+/* Ajuste de proporção para a tabela de componentes */
+.tables table:last-of-type th:last-child,
+.tables table:last-of-type td:last-child {
+    text-align: right;
+}
+
+/* ==========================================================================
+   MAQUIAGEM DO CARD / MODAL FLUTUANTE
+   ========================================================================== */
+dialog {
+    border: 0 !important;       /* FORÇA A REMOÇÃO DA BORDA PRETA DO DIALOG */
+    outline: none !important;    /* IMPEDE QUALQUER CONTORNO DE FOCO DO NAVEGADOR */
+    border-radius: 12px;
+    padding: 28px;
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 420px;
+    background-color: #ffffff;
+}
+
+dialog:focus, dialog:focus-visible {
+    outline: none !important;
+    border: 0 !important;
+}
+
+dialog::backdrop {
+    background-color: rgba(15, 23, 42, 0.4); /* Escurece o fundo da tela */
+    backdrop-filter: blur(4px);              /* Desfoca a tabela atrás */
+}
+
+dialog h3 {
+    margin-top: 0;
+    margin-bottom: 20px;
+    font-size: 18px;
+    color: #0f172a;
+    font-weight: 600;
+    text-align: center;
+}
+
+dialog form {
+    display: flex;
+    flex-direction: column; /* Alinha labels e inputs verticalmente */
+}
+
+dialog label {
+    font-size: 12px;
+    font-weight: 600;
+    color: #475569;
+    margin-top: 12px;
+    margin-bottom: 4px;
+    text-transform: uppercase;
+}
+
+dialog input[type="text"] {
+    width: 100%;
+    padding: 10px 12px;
+    font-size: 14px;
+    border: 1px solid #cbd5e1;
+    border-radius: 6px;
+    background-color: #ffffff;
+    color: #1e293b;
+    box-sizing: border-box;
+    transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+dialog input[type="text"]:focus {
+    outline: none;
+    border-color: #38bdf8;
+    box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.2);
+}
+
+/* ==========================================================================
+   ESTILIZAÇÃO DO COMPONENTE SELECT DO MODAL
+   ========================================================================== */
+dialog select {
+    width: 100%;
+    padding: 10px 12px; /* Ajustado para o padrão dos inputs textuais */
+    font-size: 14px;
+    font-family: inherit;
+    border: 1px solid #cbd5e1;
+    border-radius: 6px;
+    background-color: #ffffff;
+    color: #1e293b;
+    box-sizing: border-box;
+    cursor: pointer;
+    transition: border-color 0.15s ease, box-shadow 0.15s ease;
+
+    /* Mantém a seta nativa padrão do sistema operacional/navegador */
+    -webkit-appearance: select;
+    -moz-appearance: select;
+    appearance: select;
+}
+
+/* Efeito de Foco idêntico ao do input[type="text"] */
+dialog select:focus {
+    outline: none;
+    border-color: #38bdf8;
+    box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.2);
+}
+
+/* Estilização das opções internas do select */
+dialog select option {
+    background-color: #ffffff;
+    color: #1e293b;
+    padding: 8px;
+}

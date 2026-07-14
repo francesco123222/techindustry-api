@@ -25,7 +25,7 @@ import java.util.List;
 @EntityListeners(UserListener.class)
 public class User extends GenericBaseModel<Long> implements UserDetails {
 
-    @NotNull
+    @NotBlank(message = "O nome de usuário é obrigatório")
     @Size(max = 40)
     @Column(name = "usuario", length = 40, nullable = false)
     private String usuario;

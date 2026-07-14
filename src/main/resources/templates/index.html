@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Página Administrativa</title>
+
+    <link rel="stylesheet" th:href="@{/css/index.css}">
+    <link rel="stylesheet" th:href="@{/css/button.css}">
+    <!-- CORRIGIDO: Rota limpa para carregar o seu arquivo JavaScript funcional -->
+    <script th:src="@{/css/js/main.js}" defer></script>
+</head>
+<body>
+<div class="header">
+    <header>
+        <h1>PAINEL INFORMATIVO - <span th:text="${nomebanco}"></span></h1>
+    </header>
+</div>
+
+<main>
+
+    <div class="main_page">
+        <div class="tables">
+
+            <h1>TABELAS</h1>
+            <h3>Lista de Tabelas:</h3>
+            <table>
+                <tr th:each="tabelas : ${tabelas}">
+                    <td th:text="${tabelas + ';'}"></td>
+                </tr>
+            </table>
+
+            <h1>USUÁRIOS</h1>
+            <h3>Lista de Usuários:</h3>
+            <table>
+                <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Usuário</th>
+                    <th>CPF</th>
+                    <th>Role</th>
+                    <th style="text-align: left;">Ações</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="usuario : ${usuarios}">
+                    <td th:text="${usuario.id}"></td>
+                    <td th:text="${usuario.usuario}"></td>
+                    <td th:text="${usuario.cpf}"></td>
+                    <td th:text="${usuario.role}"></td>
+                    <td>
+                        <a th:href="@{/api/main/editar/{id}(id=${usuario.id})}" class="link-editar" th:data-id="${usuario.id}">Editar</a>
+                        <a class="btn-excluir link-excluir" th:href="@{/api/main/excluir/{id}(id=${usuario.id})}" th:data-id="${usuario.id}">Excluir</a>
+                    </td>
+                </tr>
+                </tbody>
+            </table> <!-- CORRIGIDO: A tabela fecha aqui de forma limpa -->
+
+            <h1>COMPONENTES</h1>
+            <h3>Lista de Componentes:</h3>
+            <table>
+                <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Componente</th>
+                    <th>Área</th>
+                    <th>Tipo</th>
+                    <th>Descrição</th>
+                    <th>Preço</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="componente : ${componentes}">
+                    <td th:text="${componente.id}"></td>
+                    <td th:text="${componente.nome}"></td>
+                    <td th:text="${componente.areaComponent}"></td>
+                    <td th:text="${componente.typeComponent}"></td>
+                    <td th:text="${componente.descricao}"></td>
+                    <td th:text="${componente.preco}"></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <a th:href="@{/api/main}">Atualizar página</a>
+    </div>
+
+</main>
+
+<!-- ==========================================================================
+     LUGAR CORRETO DOS MODAIS (Fora das tabelas, no rodapé do body)
+     ========================================================================== -->
+
+<!-- 1. CONTAINER E FRAGMENTO DO MODAL DE EDIÇÃO -->
+<div id="containerModal">
+    <div th:fragment="fragmentoModalEditar" th:if="${usuarioParaEditar != null}">
+        <dialog id="cardEditar" open>
+            <h3>Editar Usuário</h3>
+            <form th:action="@{/api/main/editar}" th:object="${usuarioParaEditar}" method="POST">
+                <input type="hidden" th:field="*{id}">
+
+                <label>Usuário:</label>
+                <input type="text" th:field="*{usuario}">
+                <span th:if="${#fields.hasErrors('usuario')}" th:errors="*{usuario}"
+                      style="color: #ef4444; font-size: 12px; margin-top: 4px; display: block;"></span>
+
+                <label>CPF:</label>
+                <input type="text" th:field="*{cpf}" maxlength="14" placeholder="000.000.000-00">
+                <span th:if="${#fields.hasErrors('cpf')}" th:errors="*{cpf}"
+                      style="color: #ef4444; font-size: 12px; margin-top: 4px; display: block;"></span>
+
+                <label>Role:</label>
+                <select th:field="*{role}">
+                    <option value="ADMIN">ADMIN</option>
+                    <option value="USER">USER</option>
+                </select>
+
+                <br>
+                <button type="submit" class="btn-salvar">Salvar Alterações</button>
+                <button type="button" class="btn-cancelar">Cancelar</button>
+            </form>
+        </dialog>
+    </div>
+</div>
+
+<!-- 2. CONTAINER E FRAGMENTO DO MODAL DE EXCLUSÃO (Aviso de Confirmação) -->
+<div id="containerModalDeletar" th:fragment="fragmentoModalDeletar">
+    <dialog id="cardExcluir" th:if="${usuarioParaDeletar != null}" open>
+        <h3 style="color: #ef4444;">Confirmar Exclusão</h3>
+        <p style="text-align: center; font-size: 14px; color: #64748b;">
+            Tem certeza que deseja excluir o usuário <strong><span th:text="${usuarioParaDeletar?.usuario}"></span></strong>? Esta ação não poderá ser desfeita.
+        </p>
+        <form th:action="@{/api/main/excluir}" method="POST">
+            <input type="hidden" name="id" th:value="${usuarioParaDeletar?.id}">
+
+            <button type="submit" class="btn-excluir-confirmar">Excluir Registro</button>
+            <button type="button" class="btn-cancelar">Cancelar</button>
+        </form>
+    </dialog>
+</div>
+
+</body>
+</html>

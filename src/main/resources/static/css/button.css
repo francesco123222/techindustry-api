@@ -1,0 +1,112 @@
+/* ==========================================================================
+   DESIGN DOS BOTÕES / LINKS DE AÇÃO (COMPLETO)
+   ========================================================================== */
+
+/* Configuração Base comum para todos os botões/links clicáveis */
+.link-editar, .btn-excluir, .btn-salvar, .btn-cancelar, .btn-excluir-confirmar {
+    display: inline-block;
+    padding: 8px 14px;
+    font-size: 13px;
+    font-weight: 600;
+    text-align: center;
+    text-decoration: none;     /* Remove sublinhado de link */
+    border-radius: 6px;        /* Cantos arredondados modernos */
+    cursor: pointer;
+    transition: background-color 0.15s ease, transform 0.1s ease;
+    border: none !important;   /* REMOVE QUALQUER BORDA PRETA NATIVA */
+    outline: none !important;  /* FORÇA A REMOÇÃO DA LINHA PRETA DE DESTAQUE */
+    font-family: inherit;
+}
+
+/* Efeito de clique físico (afundar de leve ao clicar) */
+.link-editar:active, .btn-excluir:active, .btn-salvar:active, .btn-cancelar:active, .btn-excluir-confirmar:active {
+    transform: scale(0.96);
+}
+
+/* Remove contornos residuais de foco do navegador em qualquer estado de clique */
+.link-editar:focus, .btn-excluir:focus, .btn-salvar:focus, .btn-cancelar:focus, .btn-excluir-confirmar:focus,
+.link-editar:focus-visible, .btn-excluir:focus-visible, .btn-salvar:focus-visible, .btn-cancelar:focus-visible, .btn-excluir-confirmar:focus-visible {
+    outline: none !important;
+    border: none !important;
+    box-shadow: none !important; /* Limpa sombras escuras padrão do navegador */
+}
+
+/* Botão Editar na Tabela (Azul) */
+.link-editar {
+    background-color: #0284c7;
+    color: #ffffff !important;
+    margin-right: 8px;
+}
+
+.link-editar:hover {
+    background-color: #0369a1;
+}
+
+/* Botão Excluir na Tabela (Vermelho) */
+.btn-excluir {
+    background-color: #ef4444;
+    color: #ffffff !important;
+}
+
+.btn-excluir:hover {
+    background-color: #dc2626;
+}
+
+/* Botão Salvar dentro do Modal de Edição (Verde) */
+.btn-salvar {
+    background-color: #22c55e;
+    color: #ffffff;
+    margin-top: 15px;
+    padding: 10px;
+    width: 100%;
+}
+
+.btn-salvar:hover {
+    background-color: #16a34a;
+}
+
+/* Botão Confirmar Exclusão dentro do Modal (Vermelho Sólido) */
+.btn-excluir-confirmar {
+    background-color: #ef4444;
+    color: #ffffff;
+    margin-top: 15px;
+    padding: 10px;
+    width: 100%;
+}
+
+.btn-excluir-confirmar:hover {
+    background-color: #dc2626;
+}
+
+/* Botão Cancelar (Cinza Neutro para ambos os modais) */
+.btn-cancelar {
+    background-color: #e2e8f0;
+    color: #475569;
+    margin-top: 8px;
+    padding: 10px;
+    width: 100%;
+}
+
+.btn-cancelar:hover {
+    background-color: #cbd5e1;
+}
+
+/* Força a célula que contém os botões a alinhar corretamente */
+td:has(.link-editar), td:has(.btn-excluir) {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start; /* Alinha os botões totalmente à esquerda */
+    gap: 0px;                    /* Mantém o espaçamento colado conforme solicitado */
+    border-bottom: none;         /* Remove conflitos de borda */
+}
+
+/* Ajuste fino no tamanho dos botões da tabela */
+.link-editar, .btn-excluir {
+    padding: 6px 12px;           /* Reduz ligeiramente a altura deles */
+    font-size: 12px;
+    line-height: 1.2;
+}
+
+.select {
+
+}

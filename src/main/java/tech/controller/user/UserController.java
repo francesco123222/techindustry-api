@@ -47,4 +47,30 @@ public class UserController extends GenericUserController<UserService, User, Lon
 
         return ResponseEntity.ok(service.listarUsuarios());
     }
+
+    @GetMapping("/listar_usuario/{id}")
+    @PreAuthorize("hasRole('ADMIN')")
+    @Operation(description = "Buscar usuário pelo id.")
+    public UserResponse retornarUsuario(@PathVariable Long id) {
+
+        return service.buscarporId(id);
+    }
+
+    @PutMapping("/atualizar_usuario/{id}")
+    @PreAuthorize("hasRole('ADMIN')")
+    @Operation(description = "Atualizar usuário pelo id.")
+    public ResponseEntity<UserResponse> atualizarUsuario(@PathVariable Long id, @RequestBody @Valid UserRequest request) {
+        UserResponse response = service.atualizar(id, request);
+
+        return ResponseEntity.ok(response);
+    }
+
+    @DeleteMapping("/deletar_usuario/{id}")
+    @PreAuthorize("hasRole('ADMIN')")
+    @Operation(description = "Deletar usuário pelo id.")
+    public ResponseEntity<?> deletarUsuario(@PathVariable Long id) {
+        service.deletar(id);
+
+        return ResponseEntity.ok("Usuário excluído com sucesso.");
+    }
 }

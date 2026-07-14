@@ -23,8 +23,6 @@ public class AdminController {
     @Autowired
     private JdbcTemplate jdbcTemplate;
 
-
-    // 1. MÉTODO AUXILIAR: Criado para preencher a tela principal sem duplicar código
     private void preencherDadosPaginaPrincipal(Model model) {
         String nomebanco = jdbcTemplate.execute(Connection::getCatalog);
         List<User> usuarios = DatabaseUtils.listarUsuarios(jdbcTemplate);
@@ -68,8 +66,8 @@ public class AdminController {
 
     @PostMapping("/main/editar")
     public String salvarEdicaoModal(@Valid @ModelAttribute("usuarioParaEditar") User usuarioAtualizado,
-                                               BindingResult result,
-                                               Model model) {
+                                    BindingResult result,
+                                    Model model) {
 
         if (usuarioAtualizado.getCpf() != null && !usuarioAtualizado.getCpf().isBlank()) {
             if (!ValidadorCPF.isValido((usuarioAtualizado.getCpf()))) {
@@ -82,7 +80,7 @@ public class AdminController {
 
 
         if (result.hasErrors()) {
-            if (result.hasFieldErrors("senha") || result.getFieldErrorCount() > 1) {
+            if (!result.hasFieldErrors("senha") || result.getErrorCount() > 1) {
 
                 preencherDadosPaginaPrincipal(model);
 

@@ -9,7 +9,6 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import tech.model.component.Componente;
 import tech.model.user.User;
-import tech.model.user.enums.UserRole;
 import tech.utils.user.DatabaseUtils;
 import tech.utils.user.ValidadorCPF;
 
@@ -45,20 +44,7 @@ public class AdminController {
 
     @GetMapping("/main/editar/{id}")
     public String carregarDadosModal(@PathVariable("id") Long id, Model model) {
-        String sql = "SELECT id, usuario, cpf, role FROM sch_techindustry.tb_usuario WHERE id = ?";
-
-        User usuarioExistente = jdbcTemplate.queryForObject(sql, (rs, rowNum) -> {
-            User u = new User();
-            u.setId(rs.getLong("id"));
-            u.setUsuario(rs.getString("usuario"));
-            u.setCpf(rs.getString("cpf"));
-            String roleValue = rs.getString("role");
-            if (roleValue != null) {
-                u.setRole(UserRole.valueOf(roleValue.toUpperCase()));
-            }
-
-            return u;
-        }, id);
+        User usuarioExistente = tech.templates.DatabaseUtils.carregarDadosModal(jdbcTemplate, id);
 
         model.addAttribute("usuarioParaEditar", usuarioExistente);
         return "index :: fragmentoModalEditar";
@@ -71,49 +57,28 @@ public class AdminController {
 
         if (usuarioAtualizado.getCpf() != null && !usuarioAtualizado.getCpf().isBlank()) {
             if (!ValidadorCPF.isValido((usuarioAtualizado.getCpf()))) {
-
                 result.rejectValue("cpf", "FieldError", "Por favor, insira um CPF válido.");
             }
         } else {
             result.rejectValue("cpf", "FieldError", "O CPF não pode estar em branco.");
         }
 
-
         if (result.hasErrors()) {
             if (!result.hasFieldErrors("senha") || result.getErrorCount() > 1) {
 
                 preencherDadosPaginaPrincipal(model);
-
                 model.addAttribute("usuarioParaEditar", usuarioAtualizado);
                 return "index";
             }
         }
-
-        String sql = "UPDATE sch_techindustry.tb_usuario SET usuario = ?, cpf = ?, role = ? WHERE id = ?";
-        String roleStr = null;
-        if (usuarioAtualizado.getRole() != null) {
-            roleStr = usuarioAtualizado.getRole().name();
-        }
-
-        jdbcTemplate.update(sql,
-                usuarioAtualizado.getUsuario(),
-                usuarioAtualizado.getCpf(),
-                roleStr,
-                usuarioAtualizado.getId());
+        tech.templates.DatabaseUtils.salvarEdicaoModal(jdbcTemplate, usuarioAtualizado);
 
         return "redirect:/api/main";
     }
 
     @GetMapping("/main/excluir/{id}")
     public String excluirUsuario(@PathVariable("id") Long id, Model model) {
-        String sql = "SELECT id, usuario FROM sch_techindustry.tb_usuario WHERE id = ?";
-
-        User usuarioParaDeletar = jdbcTemplate.queryForObject(sql, (rs, rowNum) -> {
-            User u = new User();
-            u.setId(rs.getLong("id"));
-            u.setUsuario(rs.getString("usuario"));
-            return u;
-        }, id);
+        User usuarioParaDeletar = tech.templates.DatabaseUtils.excluirUsuario(jdbcTemplate, id);
 
         model.addAttribute("usuarioParaDeletar", usuarioParaDeletar);
         return "index :: fragmentoModalDeletar";
@@ -121,8 +86,7 @@ public class AdminController {
 
     @PostMapping("/main/excluir")
     public String executarExclusao(Long id) {
-        String sql = "DELETE FROM sch_techindustry.tb_usuario WHERE id = ?";
-        jdbcTemplate.update(sql, id);
+        tech.templates.DatabaseUtils.executarExclusao(jdbcTemplate, id);
 
         return "redirect:/api/main";
     }

@@ -1,0 +1,31 @@
+/* Botão Registrar - Polimento Estético Premium */
+.form_page button[type="submit"] {
+  width: 100%;
+  padding: 13px 14px;        /* Aumentado para equilibrar perfeitamente o peso visual com os inputs */
+  background-color: #60a5fa; /* Mantido o seu azul claro elegante */
+  color: #ffffff;
+  border: none;
+  border-radius: 8px;        /* Corrigido para 8px para seguir a mesma identidade visual dos inputs */
+  font-size: 0.95rem;
+  font-weight: 700;          /* Texto ligeiramente mais encorpado para melhor legibilidade */
+  cursor: pointer;
+  margin-top: 12px;          /* Espaçamento extra para o botão respirar em relação ao campo senha */
+  letter-spacing: 1px;       /* Espaçamento refinado entre as letras em caixa alta (Premium Look) */
+  text-transform: uppercase;
+
+  /* Sombra sutil colorida que simula profundidade tridimensional física */
+  box-shadow: 0 4px 6px -1px rgba(96, 165, 250, 0.25), 0 2px 4px -1px rgba(96, 165, 250, 0.15);
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1); /* Transição mais fluida e natural */
+}
+
+/* Efeito Hover Estético */
+.form_page button[type="submit"]:hover {
+  background-color: #3b82f6; /* Mantido o seu azul médio clássico */
+  /* A sombra expande suavemente, simulando que o botão está flutuando fisicamente */
+  box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.3), 0 4px 6px -4px rgba(59, 130, 246, 0.3);
+}
+
+/* Micro-interação de clique mecânico */
+.form_page button[type="submit"]:active {
+  transform: scale(0.97); /* Encolhe milimetricamente dando a sensação de botão real */
+}

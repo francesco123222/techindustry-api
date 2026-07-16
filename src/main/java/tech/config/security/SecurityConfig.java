@@ -81,6 +81,10 @@ public class SecurityConfig {
                         .requestMatchers(HttpMethod.GET, "/api/main/excluir/{id}").permitAll()
                         .requestMatchers(HttpMethod.POST, "/api/main/excluir").permitAll()
                         .requestMatchers(HttpMethod.GET, "/api/index").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/api/main_admin").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/api/register_admin").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/api/main_login").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/api/auth/admin").permitAll()
 
                         .anyRequest().authenticated()
                 )

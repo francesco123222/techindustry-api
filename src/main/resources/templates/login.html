@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Página de Login</title>
+
+    <link rel="stylesheet" th:href="@{/css/login/login.css}">
+    <link rel="stylesheet" th:href="@{/css/login/login_button.css}">
+    <script th:src="@{/css/js/login.js}"></script>
+
+</head>
+<body>
+<main>
+    <div class="header">
+        <header>
+            <h1>LOGAR ADMINISTRADOR</h1>
+        </header>
+    </div>
+
+    <div class="form_page">
+        <form id="formulario" th:action="@{/api/auth/admin}" th:object="${adminRequest}" method="POST">
+            <h2>Insira os campos a seguir:</h2>
+            <label for="admin">ADMIN</label>
+            <input type="text" id="admin" th:field="*{usuario}" required>
+            <span th:if="${#fields.hasErrors('usuario')}" th:errors="*{usuario}"
+                  style="color: #ef4444; font-size: 12px; margin-top: 4px; display: block;"></span>
+
+            <label for="senha">SENHA</label>
+            <input type="password" id="senha" th:field="*{senha}" minlength="6" maxlength="100" required>
+
+            <button type="submit">LOGAR</button>
+        </form>
+    </div>
+
+</main>
+
+</body>
+</html>

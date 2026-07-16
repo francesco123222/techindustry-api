@@ -1,0 +1,184 @@
+/* Configuração global */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  display: flex;
+  background-color: #0f172a; /* Cor de segurança caso a imagem demore a carregar */
+}
+
+main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 40px 20px;
+
+  /* Modificado o gradiente para 0.75 para dar contraste total ao texto branco superior */
+  background-image: linear-gradient(rgba(15, 23, 42, 0.75), rgba(15, 23, 42, 0.75)),
+                    url('../images/');
+  background-position: center;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+
+/* Título superior refinado estilo Glassmorphism */
+.header {
+  margin-bottom: 28px;
+  margin-top: -3.5rem;
+  text-align: center;
+  background: rgba(255, 255, 255, 0.08); /* Fundo translúcido moderno */
+  padding: 14px 32px;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.15); /* Borda fina sutil */
+  backdrop-filter: blur(8px); /* Desfoque de fundo elegante */
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+}
+
+.header h1 {
+  font-size: 1.4rem; /* Tamanho ajustado para maior elegância */
+  font-weight: 800;
+  color: #ffffff; /* Texto branco para harmonizar e contrastar com o fundo */
+  letter-spacing: 1.5px; /* Espaçamento premium entre caracteres */
+}
+
+/* Container do Formulário (Card Branco) */
+.form_page {
+  display: flex;
+  background: #ffffff; /* Garante que o fundo do card seja branco opaco */
+  padding: 38px 32px;
+  border-radius: 16px;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.35); /* Sombra um pouco mais forte para destacar */
+  width: 100%;
+  max-width: 380px;
+  position: relative;
+  z-index: 2;
+}
+
+.form_page form {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.form_page h2 {
+  font-size: 1.15rem;
+  color: #0f172a; /* Tom escuro profundo corporativo */
+  margin-bottom: 24px;
+  font-weight: 600;
+  letter-spacing: -0.3px;
+}
+
+/* Estilo das Labels */
+.form_page label {
+  font-size: 0.75rem;
+  font-weight: 800; /* Linha ligeiramente mais grossa para destacar */
+  color: #0f172a;    /* O mesmo azul-escuro corporativo do título h2 */
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  margin-bottom: 6px;
+  padding-left: 2px;
+}
+
+/* Campos de entrada (Inputs) */
+.form_page input {
+  margin-bottom: 18px; /* Espaço ligeiramente maior entre os blocos */
+  padding: 12px 14px;  /* Altura interna mais confortável */
+  border: 1.5px solid #e2e8f0; /* Borda cinza clara neutra */
+  border-radius: 8px;  /* Curvatura modernizada combinando com o card pai */
+  font-size: 0.95rem;
+  color: #334155;
+  background-color: #ffffff;
+  outline: none;
+  transition: all 0.2s ease-in-out;
+}
+
+/* Efeito visual de foco aprimorado */
+.form_page input:focus {
+  background-color: #ffffff; /* Fundo clareia para indicar campo ativo */
+  border-color: #2563eb;     /* Azul Royal nítido */
+  box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.12); /* Brilho de foco suave e expandido */
+}
+
+/* Estilo das mensagens de erro do Thymeleaf */
+.form_page span {
+  color: #ef4444;
+  font-size: 0.75rem;
+  font-weight: 500;
+  margin-top: -14px;
+  margin-bottom: 14px;
+  display: block;
+  padding-left: 2px;
+}
+
+/* Customização estética sutil do Placeholder */
+.form_page input::placeholder {
+  color: #94a3b8; /* Um cinza claro suave que não briga com o texto digitado */
+  opacity: 0.8;
+  font-weight: 400;
+}
+
+
+/* ==========================================================================
+   Responsividade para Dispositivos Móveis (Telas de até 480px)
+   ========================================================================== */
+@media (max-width: 480px) {
+  main {
+    padding: 20px 16px; /* Reduz o espaçamento interno para aproveitar melhor a tela */
+    justify-content: flex-start; /* Alinha o conteúdo ao topo para não sumir se o teclado abrir */
+    padding-top: 4rem; /* Garante um espaço confortável no topo */
+
+    /* Ajusta a imagem de fundo para preencher melhor a proporção vertical do celular */
+    background-size: cover;
+    background-position: center;
+  }
+
+  /* Deixa o título superior um pouco menor e mais compacto */
+  .header {
+    margin-top: 0;
+    margin-bottom: 20px;
+    width: 100%;
+    max-width: 340px; /* Alinha a largura com o card de forma harmônica */
+    padding: 10px 20px;
+  }
+
+  .header h1 {
+    font-size: 1.15rem; /* Diminui o texto para não quebrar em duas linhas no celular */
+    letter-spacing: 1px;
+  }
+
+  /* Ajusta o card do formulário para as bordas da tela do celular */
+  .form_page {
+    padding: 28px 20px; /* Reduz o padding interno para sobrar mais espaço para os inputs */
+    max-width: 340px; /* Largura ideal para a maioria dos smartphones modernos */
+    border-radius: 12px; /* Curvatura sutilmente menor para telas pequenas */
+  }
+
+  .form_page h2 {
+    font-size: 1.05rem;
+    margin-bottom: 18px;
+    text-align: center; /* Centraliza o subtítulo para guiar melhor o olhar na tela estreita */
+  }
+
+  /* Aumenta ligeiramente a área de clique dos inputs para facilitar o toque com o dedo */
+  .form_page input {
+    padding: 14px;
+    font-size: 1rem; /* Evita que o iOS dê zoom automático ao focar no campo */
+    margin-bottom: 14px;
+  }
+
+  /* Melhora o botão para o toque touch */
+  .form_page button[type="submit"] {
+    padding: 14px;
+    font-size: 1rem;
+  }
+}

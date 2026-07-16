@@ -1,8 +1,17 @@
 package tech.utils.user;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+import tech.repository.UserRepository;
+
+@Component
 public class ValidadorCPF {
 
-    public static boolean isValido(String cpf){
+    @Autowired
+    private UserRepository userRepository;
+
+
+    public static boolean isValido(String cpf) {
         if (cpf == null) return false;
 
         cpf = cpf.replaceAll("\\D", "");
@@ -31,4 +40,27 @@ public class ValidadorCPF {
             return false;
         }
     }
+
+    public boolean adminExiste(String usuario) {
+        return userRepository.existsByUsuario(usuario);
+    }
+
+    public boolean cpfExiste(String cpf) {
+        if (cpf == null || cpf.isBlank()) {
+            return false;
+        }
+
+        String cpfBusca = cpf.replaceAll("\\D", "");
+
+        if (cpfBusca.matches("\\d{11}")) {
+            cpfBusca = String.format("%s.%s.%s-%s",
+                    cpfBusca.substring(0, 3),
+                    cpfBusca.substring(3, 6),
+                    cpfBusca.substring(6, 9),
+                    cpfBusca.substring(9, 11));
+        }
+
+        return userRepository.existsByCpf(cpfBusca);
+    }
+
 }

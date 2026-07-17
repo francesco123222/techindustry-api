@@ -48,7 +48,29 @@ public class SecurityConfig {
         return http
                 .csrf(csrf -> csrf.disable())
 
-                .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+                //.sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+
+                .formLogin(form -> form
+                        .loginPage("/api/main_login")
+                        .loginProcessingUrl("/api/auth/admin")
+                        .usernameParameter("usuario")
+                        .passwordParameter("senha")
+                        .successHandler((request, response, authentication) -> {
+
+                            boolean admin = authentication.getAuthorities().stream()
+                                    .anyMatch(a -> a.getAuthority().equals("ROLE_ADMIN"));
+
+                            if (!admin) {
+                                request.getSession().invalidate();
+                                response.sendRedirect("/api/main_login?accessDenied");
+                                return;
+                            }
+
+                            response.sendRedirect("/api/main");
+                        })
+                        .failureUrl("/api/main_login?error")
+                        .permitAll()
+                )
 
                 .headers(headers -> headers
                         .contentSecurityPolicy(csp -> csp
@@ -75,7 +97,6 @@ public class SecurityConfig {
 
                         // DEMAIS ROTAS
                         .requestMatchers(HttpMethod.GET, "/api/status").permitAll()
-                        .requestMatchers(HttpMethod.GET, "/api/main").permitAll()
                         .requestMatchers(HttpMethod.GET, "/api/main/editar/{id}").permitAll()
                         .requestMatchers(HttpMethod.POST, "/api/main/editar").permitAll()
                         .requestMatchers(HttpMethod.GET, "/api/main/excluir/{id}").permitAll()
@@ -84,7 +105,7 @@ public class SecurityConfig {
                         .requestMatchers(HttpMethod.GET, "/api/main_admin").permitAll()
                         .requestMatchers(HttpMethod.POST, "/api/register_admin").permitAll()
                         .requestMatchers(HttpMethod.GET, "/api/main_login").permitAll()
-                        .requestMatchers(HttpMethod.POST, "/api/auth/admin").permitAll()
+                        //.requestMatchers(HttpMethod.POST, "/api/auth/admin").permitAll()
 
                         .anyRequest().authenticated()
                 )

@@ -24,7 +24,9 @@ body {
     margin-left: auto;
     margin-right: auto;
 }
-
+.header h2 {
+    margin-left: 10rem;
+}
 .header h1 span {
     color: #38bdf8;
 }
@@ -67,16 +69,25 @@ body {
     font-weight: 400;
 }
 
-.main_page > a {
+.links-container {
+  display: flex;
+  flex-direction: row;
+  gap: 16px; /* Define o espaço entre os dois botões */
+}
+.links-container a {
     display: inline-block;
     color: #0284c7;
     text-decoration: none;
-    font-size: 14px;
+    font-size: 20px;
+    margin-top: -10px;
     font-weight: 500;
 }
-
-.main_page > a:hover {
+.links-container a:hover {
     text-decoration: underline;
+}
+.links-container p {
+    font-size: 1.5rem;
+    margin-top: -0.8rem;
 }
 
 /* ==========================================================================

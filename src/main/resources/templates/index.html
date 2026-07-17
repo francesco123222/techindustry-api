@@ -13,6 +13,7 @@
 <div class="header">
     <header>
         <h1>PAINEL INFORMATIVO - <span th:text="${nomebanco}"></span></h1>
+        <h2>BEM VINDO, <span th:text="${usuarioLogado.usuario}"></span>!</h2>
     </header>
 </div>
 
@@ -53,7 +54,53 @@
                     </td>
                 </tr>
                 </tbody>
-            </table> <!-- CORRIGIDO: A tabela fecha aqui de forma limpa -->
+
+                <div id="containerModal">
+                    <div th:fragment="fragmentoModalEditar" th:if="${usuarioParaEditar != null}">
+                        <dialog id="cardEditar" open>
+                            <h3>Editar Usuário</h3>
+                            <form th:action="@{/api/main/editar}" th:object="${usuarioParaEditar}" method="POST">
+                                <input type="hidden" th:field="*{id}">
+
+                                <label>Usuário:</label>
+                                <input type="text" th:field="*{usuario}">
+                                <span th:if="${#fields.hasErrors('usuario')}" th:errors="*{usuario}"
+                                      style="color: #ef4444; font-size: 12px; margin-top: 4px; display: block;"></span>
+
+                                <label>CPF:</label>
+                                <input type="text" th:field="*{cpf}" maxlength="14" placeholder="000.000.000-00">
+                                <span th:if="${#fields.hasErrors('cpf')}" th:errors="*{cpf}"
+                                      style="color: #ef4444; font-size: 12px; margin-top: 4px; display: block;"></span>
+
+                                <label>Role:</label>
+                                <select th:field="*{role}">
+                                    <option value="ADMIN">ADMIN</option>
+                                    <option value="USER">USER</option>
+                                </select>
+
+                                <br>
+                                <button type="submit" class="btn-salvar">Salvar Alterações</button>
+                                <button type="button" class="btn-cancelar">Cancelar</button>
+                            </form>
+                        </dialog>
+                    </div>
+                </div>
+
+                <div id="containerModalDeletar" th:fragment="fragmentoModalDeletar">
+                    <dialog id="cardExcluir" th:if="${usuarioParaDeletar != null}" open>
+                        <h3 style="color: #ef4444;">Confirmar Exclusão</h3>
+                        <p style="text-align: center; font-size: 14px; color: #64748b;">
+                            Tem certeza que deseja excluir o usuário <strong><span th:text="${usuarioParaDeletar?.usuario}"></span></strong>? Esta ação não poderá ser desfeita.
+                        </p>
+                        <form th:action="@{/api/main/excluir}" method="POST">
+                            <input type="hidden" name="id" th:value="${usuarioParaDeletar?.id}">
+
+                            <button type="submit" class="btn-excluir-confirmar">Excluir Registro</button>
+                            <button type="button" class="btn-cancelar">Cancelar</button>
+                        </form>
+                    </dialog>
+                </div>
+            </table>
 
             <h1>COMPONENTES</h1>
             <h3>Lista de Componentes:</h3>
@@ -80,7 +127,11 @@
                 </tbody>
             </table>
         </div>
-        <a th:href="@{/api/main}">Atualizar página</a>
+        <div class="links-container">
+            <a th:href="@{/api/main}">Atualizar página</a>
+            <p>|</p>
+            <a th:href="@{/api/main_login}">Logout</a>
+        </div>
     </div>
 
 </main>
@@ -90,52 +141,6 @@
      ========================================================================== -->
 
 <!-- 1. CONTAINER E FRAGMENTO DO MODAL DE EDIÇÃO -->
-<div id="containerModal">
-    <div th:fragment="fragmentoModalEditar" th:if="${usuarioParaEditar != null}">
-        <dialog id="cardEditar" open>
-            <h3>Editar Usuário</h3>
-            <form th:action="@{/api/main/editar}" th:object="${usuarioParaEditar}" method="POST">
-                <input type="hidden" th:field="*{id}">
-
-                <label>Usuário:</label>
-                <input type="text" th:field="*{usuario}">
-                <span th:if="${#fields.hasErrors('usuario')}" th:errors="*{usuario}"
-                      style="color: #ef4444; font-size: 12px; margin-top: 4px; display: block;"></span>
-
-                <label>CPF:</label>
-                <input type="text" th:field="*{cpf}" maxlength="14" placeholder="000.000.000-00">
-                <span th:if="${#fields.hasErrors('cpf')}" th:errors="*{cpf}"
-                      style="color: #ef4444; font-size: 12px; margin-top: 4px; display: block;"></span>
-
-                <label>Role:</label>
-                <select th:field="*{role}">
-                    <option value="ADMIN">ADMIN</option>
-                    <option value="USER">USER</option>
-                </select>
-
-                <br>
-                <button type="submit" class="btn-salvar">Salvar Alterações</button>
-                <button type="button" class="btn-cancelar">Cancelar</button>
-            </form>
-        </dialog>
-    </div>
-</div>
-
-<!-- 2. CONTAINER E FRAGMENTO DO MODAL DE EXCLUSÃO (Aviso de Confirmação) -->
-<div id="containerModalDeletar" th:fragment="fragmentoModalDeletar">
-    <dialog id="cardExcluir" th:if="${usuarioParaDeletar != null}" open>
-        <h3 style="color: #ef4444;">Confirmar Exclusão</h3>
-        <p style="text-align: center; font-size: 14px; color: #64748b;">
-            Tem certeza que deseja excluir o usuário <strong><span th:text="${usuarioParaDeletar?.usuario}"></span></strong>? Esta ação não poderá ser desfeita.
-        </p>
-        <form th:action="@{/api/main/excluir}" method="POST">
-            <input type="hidden" name="id" th:value="${usuarioParaDeletar?.id}">
-
-            <button type="submit" class="btn-excluir-confirmar">Excluir Registro</button>
-            <button type="button" class="btn-cancelar">Cancelar</button>
-        </form>
-    </dialog>
-</div>
 
 </body>
 </html>

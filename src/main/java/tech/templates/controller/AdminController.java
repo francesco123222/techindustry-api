@@ -3,6 +3,7 @@ package tech.templates.controller;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -27,8 +28,10 @@ public class AdminController {
         List<User> usuarios = DatabaseUtils.listarUsuarios(jdbcTemplate);
         List<String> tabelas = tech.templates.DatabaseUtils.listarTabelas(jdbcTemplate);
         List<Componente> componentes = tech.utils.component.DatabaseUtils.listarComponentes(jdbcTemplate);
+        User usuario = tech.utils.user.DatabaseUtils.usuarioLogado();
 
         model.addAttribute("nomebanco", nomebanco);
+        model.addAttribute("usuarioLogado", usuario);
         model.addAttribute("usuarios", usuarios);
         model.addAttribute("tabelas", tabelas);
         model.addAttribute("componentes", componentes);
@@ -36,6 +39,7 @@ public class AdminController {
 
 
     @GetMapping("/main")
+    @PreAuthorize("hasRole('ADMIN')")
     public String paginaPrincipal(Model model) {
 
         preencherDadosPaginaPrincipal(model);

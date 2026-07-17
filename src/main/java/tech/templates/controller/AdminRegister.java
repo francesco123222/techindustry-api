@@ -50,7 +50,6 @@ public class AdminRegister {
                 }
             }
         }
-
         if (validadorCPF.adminExiste(request.usuario())) {
             result.rejectValue("usuario", "FieldError", "Admin já cadastrado no sistema.");
         }

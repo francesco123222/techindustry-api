@@ -21,12 +21,17 @@
         <form id="formulario" th:action="@{/api/auth/admin}" th:object="${adminRequest}" method="POST">
             <h2>Insira os campos a seguir:</h2>
             <label for="admin">ADMIN</label>
-            <input type="text" id="admin" th:field="*{usuario}" required>
+            <input type="text" id="admin" th:field="*{usuario}" maxlength="40" required>
             <span th:if="${#fields.hasErrors('usuario')}" th:errors="*{usuario}"
                   style="color: #ef4444; font-size: 12px; margin-top: 4px; display: block;"></span>
 
             <label for="senha">SENHA</label>
             <input type="password" id="senha" th:field="*{senha}" minlength="6" maxlength="100" required>
+
+            <div th:if="${erro}"
+                 style="color: #ef4444; font-size: 13px; margin-top: 7px; margin-bottom: 12px;">
+                <span th:text="${erro}"></span>
+            </div>
 
             <button type="submit">LOGAR</button>
         </form>

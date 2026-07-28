@@ -1,3 +1,3 @@
 package tech.dto.user;
 
-public record TokenResponse(String token, String role) {}
+public record TokenResponse(String usuario, String token, String role) {}

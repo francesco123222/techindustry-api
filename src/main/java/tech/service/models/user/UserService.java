@@ -1,4 +1,4 @@
-package tech.service.user;
+package tech.service.models.user;
 
 import lombok.RequiredArgsConstructor;
 import org.apache.catalina.users.GenericUser;

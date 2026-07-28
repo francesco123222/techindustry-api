@@ -6,13 +6,12 @@ import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import tech.dto.component.ComponenteRequest;
 import tech.dto.component.ComponenteResponse;
 import tech.global.controller.GenericComponenteRequestController;
 import tech.model.component.Componente;
-import tech.service.component.ComponenteService;
+import tech.service.models.component.ComponenteService;
 import tech.utils.component.DatabaseUtils;
 
 import java.util.List;

@@ -35,17 +35,17 @@ public class AuthControllerAdmin {
 
             Authentication authentication = authenticationManager.authenticate(authenticationToken);
 
-            User adminlogado = (User) authentication.getPrincipal();
+            User adminLogado = (User) authentication.getPrincipal();
 
-            if (adminlogado.getRole() != UserRole.ADMIN) {
+            if (adminLogado.getRole() != UserRole.ADMIN) {
                 return ResponseEntity.status(403).body("Acesso negado: Usuário não é admnistrador.");
             }
 
-            String tokenJwt = tokenService.gerarToken(adminlogado);
-            String role = adminlogado.getRole().name();
+            String usuario = adminLogado.getUsuario();
+            String tokenJwt = tokenService.gerarToken(adminLogado);
+            String role = adminLogado.getRole().name();
 
-            return ResponseEntity.ok(new TokenResponse(tokenJwt, role));
-
+            return ResponseEntity.ok(new TokenResponse(usuario, tokenJwt, role));
         } catch (Exception e) {
             System.out.println("ERRO REAL NO LOGIN: " + e.getMessage());
             e.printStackTrace();

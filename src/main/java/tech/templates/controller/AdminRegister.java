@@ -4,16 +4,14 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import tech.dto.user.AdminRequest;
 import tech.dto.user.UserRequest;
-import tech.dto.user.UserResponse;
 import tech.model.user.enums.UserRole;
-import tech.service.user.UserService;
+import tech.service.models.user.UserService;
 import tech.utils.user.ValidadorCPF;
 
 @Tag(name = "Cadastrar Admnistradores")

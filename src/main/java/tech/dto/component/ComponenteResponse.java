@@ -7,12 +7,12 @@ import tech.model.component.enums.TypeComponent;
 import java.math.BigDecimal;
 
 public record ComponenteResponse(
-    Long id,
-    String nome,
-    AreaComponent areaComponent,
-    TypeComponent typeComponent,
-    String descricao,
-    BigDecimal preco
+        Long id,
+        String nome,
+        AreaComponent areaComponent,
+        TypeComponent typeComponent,
+        String descricao,
+        BigDecimal preco
 ) {
 
     public ComponenteResponse(Componente componente) {

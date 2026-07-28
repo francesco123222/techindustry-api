@@ -10,7 +10,7 @@ import tech.dto.component.ComponenteRequest;
 import tech.dto.component.ComponenteResponse;
 import tech.global.controller.GenericComponenteRequestController;
 import tech.model.component.Componente;
-import tech.service.component.ComponenteService;
+import tech.service.models.component.ComponenteService;
 
 import java.util.List;
 

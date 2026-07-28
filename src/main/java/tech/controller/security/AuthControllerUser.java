@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 import tech.dto.user.LoginRequest;
 import tech.dto.user.TokenResponse;
 import tech.model.user.User;
+import tech.model.user.enums.UserRole;
 import tech.service.security.TokenService;
 
 @RestController
@@ -34,10 +35,16 @@ public class AuthControllerUser {
             Authentication authentication = authenticationManager.authenticate(authenticationToken);
 
             User userLogado = (User) authentication.getPrincipal();
+
+            if (userLogado.getRole() != UserRole.USER) {
+                return ResponseEntity.status(403).body("Acesso negado. Esta área é restrita para usuários.");
+            }
+
+            String usuario = userLogado.getUsuario();
             String tokenJwt = tokenService.gerarToken(userLogado);
             String role = userLogado.getRole().name();
 
-            return ResponseEntity.ok(new TokenResponse(tokenJwt, role));
+            return ResponseEntity.ok(new TokenResponse(usuario, tokenJwt, role));
         } catch (Exception e) {
             System.out.println("ERRO REAL NO LOGIN: " + e.getMessage());
             e.printStackTrace();

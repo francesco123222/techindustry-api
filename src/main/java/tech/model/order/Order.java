@@ -2,7 +2,6 @@ package tech.model.order;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Size;
 import lombok.*;
 import tech.global.model.GenericBaseModel;
 import tech.model.user.User;
@@ -22,11 +21,6 @@ public class Order extends GenericBaseModel<Long> {
     @NotNull
     @Column(name = "data_pedido", nullable = false)
     private LocalDateTime dataPedido;
-
-    @NotNull
-    @Size(max = 50)
-    @Column(name = "tipo", length = 50, nullable = false)
-    private String tipo;
 
     @NotNull
     @ManyToOne(fetch = FetchType.LAZY)

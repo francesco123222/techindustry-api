@@ -1,10 +1,13 @@
 package tech.model.order;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
 import lombok.*;
 import tech.global.model.GenericBaseModel;
 import tech.model.component.Componente;
+
+import java.math.BigDecimal;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -26,6 +29,11 @@ public class OrderItem extends GenericBaseModel<Long> {
     private Componente componente;
 
     @NotNull
+    @Min(1)
     @Column(name = "quantidade", nullable = false)
     private Integer quantidade;
+
+    @NotNull
+    @Column(name = "preco_unitario", precision = 10, scale = 2, nullable = false)
+    private BigDecimal precoUnitario;
 }

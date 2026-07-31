@@ -1,5 +1,6 @@
 package tech.controller.security;
 
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -15,6 +16,7 @@ import tech.model.user.User;
 import tech.model.user.enums.UserRole;
 import tech.service.security.TokenService;
 
+@Tag(name = "Logar Usuários")
 @RestController
 @RequestMapping("/auth")
 public class AuthControllerUser {
@@ -44,7 +46,7 @@ public class AuthControllerUser {
             String tokenJwt = tokenService.gerarToken(userLogado);
             String role = userLogado.getRole().name();
 
-            return ResponseEntity.ok(new TokenResponse(usuario, tokenJwt, role));
+            return ResponseEntity.ok(new TokenResponse(userLogado.getId(), usuario, tokenJwt, role));
         } catch (Exception e) {
             System.out.println("ERRO REAL NO LOGIN: " + e.getMessage());
             e.printStackTrace();

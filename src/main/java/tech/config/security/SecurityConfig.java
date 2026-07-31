@@ -92,6 +92,10 @@ public class SecurityConfig {
                         .requestMatchers(HttpMethod.POST, "/auth/login").permitAll()
                         .requestMatchers(HttpMethod.POST, "/auth/admin").permitAll()
 
+                        // ORDENS DE SERVIÇO
+                        .requestMatchers(HttpMethod.POST, "/pedidos/comprar-componente").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/admin/pedidos").permitAll()
+
                         // SWAGGER
                         .requestMatchers("/v3/api-docs/**", "/swagger-ui/**", "/swagger-ui.html").permitAll()
 

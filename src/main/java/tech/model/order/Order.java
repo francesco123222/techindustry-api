@@ -8,6 +8,7 @@ import tech.model.user.User;
 import java.util.List;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -20,18 +21,20 @@ public class Order extends GenericBaseModel<Long> {
 
     @NotNull
     @Column(name = "data_pedido", nullable = false)
-    private LocalDateTime dataPedido;
+    private String dataPedido;
 
     @NotNull
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_usuario", nullable = false)
-    private User titular;
+    private User cliente;
 
     @OneToMany(mappedBy = "pedido", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<OrderItem> itens;
 
     @PrePersist
     protected void onCreate() {
-        this.dataPedido = LocalDateTime.now();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
+        LocalDateTime now = LocalDateTime.now();
+        this.dataPedido = now.format(formatter);
     }
 }

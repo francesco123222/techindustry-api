@@ -7,7 +7,7 @@ import java.util.List;
 
 public record OrderResponse(
         Long id,
-        LocalDateTime dataPedido,
+        String dataPedido,
         Long idUsuario,
         List<OrderItemResponse> itens
 ) {
@@ -16,7 +16,7 @@ public record OrderResponse(
         this(
                 order.getId(),
                 order.getDataPedido(),
-                order.getTitular().getId(),
+                order.getCliente().getId(),
                 order.getItens()
                         .stream()
                         .map(OrderItemResponse::new)

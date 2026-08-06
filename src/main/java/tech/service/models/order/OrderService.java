@@ -32,7 +32,7 @@ public class OrderService {
                 .orElseThrow(() -> new RuntimeException("Usuário não encontrado"));
 
         Order order = Order.builder()
-                .titular(usuario)
+                .cliente(usuario)
                 .build();
 
         List<OrderItem> itens = new ArrayList<>();

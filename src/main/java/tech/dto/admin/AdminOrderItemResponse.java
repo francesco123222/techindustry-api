@@ -10,8 +10,8 @@ public record AdminOrderItemResponse(
         String nomeComponente,
         String tipoComponente,
         Integer quantidade,
-        BigDecimal precoUnitario,
-        BigDecimal subtotal
+        String precoUnitario,
+        String subtotal
 ) {
 
     public AdminOrderItemResponse(OrderItem item) {
@@ -21,9 +21,8 @@ public record AdminOrderItemResponse(
                 item.getComponente().getNome(),
                 item.getComponente().getTypeComponent().name(),
                 item.getQuantidade(),
-                item.getPrecoUnitario(),
-                item.getPrecoUnitario()
-                        .multiply(BigDecimal.valueOf(item.getQuantidade()))
+                String.format("R$ %.2f", item.getPrecoUnitario()),
+                String.format("R$ %.2f", item.getPrecoUnitario().multiply(BigDecimal.valueOf(item.getQuantidade())))
         );
     }
 }

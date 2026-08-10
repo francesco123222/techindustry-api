@@ -12,6 +12,7 @@ import tech.global.service.IComponentService;
 import tech.model.component.Componente;
 import tech.repository.ComponenteRepository;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -54,18 +55,29 @@ public class ComponenteService extends GenericComponenteService<ComponenteReposi
     }
 
     @Transactional(readOnly = true)
-    public List<ComponenteResponse> buscarPorNome(String nome) {
-        List<Componente> componentes = repository.findByNomeContainingIgnoreCase(nome);
-
-
-        if (componentes.isEmpty()) {
-            throw new ResponseStatusException(
-                    HttpStatus.NOT_FOUND,
-                    "Nenhum componente encontrado com o nome'"  + nome + "'."
-            );
+    public List<ComponenteResponse> buscarPorNome(List<String> nomes) {
+        if (nomes == null || nomes.isEmpty()) {
+            return List.of();
         }
 
-        return componentes.stream()
+        List<Componente> todosComponentes = new ArrayList<>();
+
+        for (String nome : nomes) {
+            if (nome != null && !nome.trim().isEmpty()) {
+                List<Componente> encontrados = repository.findByNomeContainingIgnoreCase(nome.trim());
+                todosComponentes.addAll(encontrados);
+            }
+        }
+
+        List<Componente> componentesSemDuplicados = todosComponentes.stream()
+                .distinct()
+                .collect(Collectors.toList());
+
+        if (componentesSemDuplicados.isEmpty()) {
+            return List.of();
+        }
+
+        return componentesSemDuplicados.stream()
                 .map(ComponenteResponse::new)
                 .collect(Collectors.toList());
     }

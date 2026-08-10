@@ -14,6 +14,7 @@ import tech.model.component.Componente;
 import tech.service.models.component.ComponenteService;
 import tech.utils.component.DatabaseUtils;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -58,10 +59,24 @@ public class ComponenteControllerManual extends GenericComponenteRequestControll
 
     @GetMapping("/componentes/buscar")
     @Operation(description = "Buscar componente pelo nome.")
-    public ResponseEntity<List<ComponenteResponse>> buscarPorComponente(@RequestParam String nome) {
-        List<ComponenteResponse> response = service.buscarPorNome(nome);
+    public ResponseEntity<List<ComponenteResponse>> buscarPorComponente(
+            @RequestParam(value = "nome", required = false) List<String> nome) {
 
-        return ResponseEntity.ok(response);
+            if (nome == null || nome.isEmpty()) {
+                return ResponseEntity.ok(Collections.emptyList());
+            }
+
+            List<String> nomesValidos = nome.stream()
+                    .filter(n -> n != null && !n.trim().isEmpty())
+                    .collect(Collectors.toList());
+
+            if (nomesValidos.isEmpty()) {
+                return ResponseEntity.ok(Collections.emptyList());
+            }
+
+            List<ComponenteResponse> response = service.buscarPorNome(nomesValidos);
+
+            return ResponseEntity.ok(response);
     }
 
     @PutMapping("/atualizar/{id}")

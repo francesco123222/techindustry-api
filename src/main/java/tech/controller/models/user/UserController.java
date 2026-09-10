@@ -3,7 +3,9 @@ package tech.controller.models.user;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import tech.dto.user.UserRequest;
@@ -12,13 +14,18 @@ import tech.global.controller.GenericUserController;
 import tech.model.user.User;
 import tech.model.user.enums.UserRole;
 import tech.service.models.user.UserService;
+import tech.utils.user.DatabaseUtils;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
-@Tag(name = "Cadastrar Usuários")
+@Tag(name = "Usuários")
 @RestController
 @RequestMapping("/api")
 public class UserController extends GenericUserController<UserService, User, Long> {
+
+    @Autowired
+    private JdbcTemplate jdbcTemplate;
 
     @PostMapping("/cadastrar_usuario")
     @Operation(description = "Cadastrar usuário.")
@@ -45,15 +52,13 @@ public class UserController extends GenericUserController<UserService, User, Lon
     @Operation(description = "Listar usuários.")
     public ResponseEntity<List<UserResponse>> listarUsuarios() {
 
-        return ResponseEntity.ok(service.listarUsuarios());
-    }
+        List<User> usuarios = DatabaseUtils.listarUsuarios(jdbcTemplate);
 
-    @GetMapping("/listar_usuario/{id}")
-    @PreAuthorize("hasRole('ADMIN')")
-    @Operation(description = "Buscar usuário pelo id.")
-    public UserResponse retornarUsuario(@PathVariable Long id) {
+        List<UserResponse> response = usuarios.stream()
+                .map(UserResponse::new)
+                .collect(Collectors.toList());
 
-        return service.buscarporId(id);
+        return ResponseEntity.ok(response);
     }
 
     @PutMapping("/atualizar_usuario/{id}")
@@ -63,14 +68,5 @@ public class UserController extends GenericUserController<UserService, User, Lon
         UserResponse response = service.atualizar(id, request);
 
         return ResponseEntity.ok(response);
-    }
-
-    @DeleteMapping("/deletar_usuario/{id}")
-    @PreAuthorize("hasRole('ADMIN')")
-    @Operation(description = "Deletar usuário pelo id.")
-    public ResponseEntity<?> deletarUsuario(@PathVariable Long id) {
-        service.deletar(id);
-
-        return ResponseEntity.ok("Usuário excluído com sucesso.");
     }
 }

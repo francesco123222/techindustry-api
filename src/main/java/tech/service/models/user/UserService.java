@@ -1,17 +1,12 @@
 package tech.service.models.user;
 
 import lombok.RequiredArgsConstructor;
-import org.apache.catalina.users.GenericUser;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.server.ResponseStatusException;
 import tech.dto.user.UserRequest;
 import tech.dto.user.UserResponse;
 import tech.global.service.GenericUserService;
-import tech.global.service.IUserService;
 import tech.handler.exception.BusinessException;
 import tech.handler.exception.ResourceNotFoundException;
 import tech.model.user.User;
@@ -23,7 +18,7 @@ import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
-public class UserService extends GenericUserService<UserRepository, User, Long> implements IUserService {
+public class UserService extends GenericUserService<UserRepository, User, Long> {
 
     private final PasswordEncoder passwordEncoder;
 
@@ -73,15 +68,6 @@ public class UserService extends GenericUserService<UserRepository, User, Long> 
                 .collect(Collectors.toList());
     }
 
-    @Transactional(readOnly = true)
-    public UserResponse buscarporId(Long id) {
-        return repository.findById(id)
-                .map(UserResponse::new)
-                .orElseThrow(() -> new ResourceNotFoundException(
-                        "Usuário com ID " + id + " não existe no nosso banco de dados."
-                ));
-    }
-
     @Transactional
     public UserResponse atualizar(Long id, UserRequest userRequest) {
         User userExistente = repository.findById(id)
@@ -97,15 +83,6 @@ public class UserService extends GenericUserService<UserRepository, User, Long> 
         return new UserResponse(userAtualizado);
     }
 
-    @Override
-    @Transactional
-    public void deletar(Long id) {
-        if (!repository.existsById(id)) {
-            throw new ResourceNotFoundException("Registro não encontrado para exclusão com o ID: " + id);
-        }
-
-        repository.deleteById(id);
-    }
 
     // --- MÉTODOS AUXILIARES DE VALIDAÇÃO (REGRAS DE NEGÓCIO) ---
 

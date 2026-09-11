@@ -8,17 +8,19 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import tech.dto.component.ComponenteRequest;
 import tech.dto.component.ComponenteResponse;
-import tech.global.controller.GenericComponenteRequestController;
+import tech.global.controller.GenericComponenteController;
 import tech.model.component.Componente;
 import tech.service.models.component.ComponenteService;
 
+import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
-@Tag(name = "Cadastrar Componentes")
+@Tag(name = "Componentes")
 @RestController
 @RequestMapping("/api")
 @Validated
-public class ComponenteController extends GenericComponenteRequestController<ComponenteService, Componente, Long> {
+public class ComponenteController extends GenericComponenteController<ComponenteService, Componente, Long> {
 
     @PostMapping("/cadastrar_componente")
     @Operation(description = "Cadastrar componente.")
@@ -37,11 +39,26 @@ public class ComponenteController extends GenericComponenteRequestController<Com
         return ResponseEntity.ok(service.listarTodos());
     }
 
-    @GetMapping("/retornar_componente/{id}")
-    @Operation(description = "Retornar componente pelo id.")
-    public ComponenteResponse retornarComponente(@PathVariable Long id) {
+    @GetMapping("/componentes/buscar")
+    @Operation(description = "Buscar componente pelo nome.")
+    public ResponseEntity<List<ComponenteResponse>> buscarPorComponente(
+            @RequestParam(value = "nome", required = false) List<String> nome) {
 
-        return service.buscarporId(id);
+        if (nome == null || nome.isEmpty()) {
+            return ResponseEntity.ok(Collections.emptyList());
+        }
+
+        List<String> nomesValidos = nome.stream()
+                .filter(n -> n != null && !n.trim().isEmpty())
+                .collect(Collectors.toList());
+
+        if (nomesValidos.isEmpty()) {
+            return ResponseEntity.ok(Collections.emptyList());
+        }
+
+        List<ComponenteResponse> response = service.buscarPorNome(nomesValidos);
+
+        return ResponseEntity.ok(response);
     }
 
     @PutMapping("/atualizar_componente/{id}")
@@ -50,14 +67,6 @@ public class ComponenteController extends GenericComponenteRequestController<Com
         ComponenteResponse response = service.atualizar(id, request);
 
         return ResponseEntity.ok(response);
-    }
-
-    @DeleteMapping("/deletar_componente/{id}")
-    @Operation(description = "Deletar um componente existente")
-    public ResponseEntity<String> deletarComponente(@PathVariable Long id) {
-        service.deletar(id);
-
-        return ResponseEntity.ok("Componente excluído com sucesso");
     }
 
 }

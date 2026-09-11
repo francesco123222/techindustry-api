@@ -8,7 +8,6 @@ import org.springframework.web.server.ResponseStatusException;
 import tech.dto.component.ComponenteRequest;
 import tech.dto.component.ComponenteResponse;
 import tech.global.service.GenericComponenteService;
-import tech.global.service.IComponentService;
 import tech.model.component.Componente;
 import tech.repository.ComponenteRepository;
 
@@ -19,7 +18,7 @@ import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
-public class ComponenteService extends GenericComponenteService<ComponenteRepository, Componente, Long> implements IComponentService {
+public class ComponenteService extends GenericComponenteService<ComponenteRepository, Componente, Long> {
 
     @Transactional
     public ComponenteResponse incluir(ComponenteRequest request) {
@@ -42,16 +41,6 @@ public class ComponenteService extends GenericComponenteService<ComponenteReposi
                 .stream()
                 .map(ComponenteResponse::new)
                 .collect(Collectors.toList());
-    }
-
-    @Transactional(readOnly = true)
-    public ComponenteResponse buscarporId(Long id) {
-        return repository.findById(id)
-                .map(componente -> new ComponenteResponse(componente))
-                .orElseThrow(() -> new ResponseStatusException(
-                        HttpStatus.NOT_FOUND,
-                        "Componente com ID " + id + " não existe."
-                ));
     }
 
     @Transactional(readOnly = true)
@@ -96,16 +85,6 @@ public class ComponenteService extends GenericComponenteService<ComponenteReposi
         Componente componenteAtualizado = this.atualizar(id, componenteExistente);
 
         return new ComponenteResponse(componenteAtualizado);
-    }
-
-    @Override
-    @Transactional
-    public void deletar(Long id) {
-        if (!repository.existsById(id)) {
-            throw new RuntimeException("Registro não encontrado para exclusão com o ID: " + id);
-        }
-
-        repository.deleteById(id);
     }
 
 }

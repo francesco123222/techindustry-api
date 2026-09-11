@@ -7,6 +7,14 @@ spring:
       hibernate:
         default_schema: sch_techindustry
 
+logging:
+  level:
+    org:
+      hibernate:
+        orm:
+          connections:
+            pooling: ERROR
+
   thymeleaf:
      cache: false
 

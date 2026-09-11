@@ -16,9 +16,9 @@ public class DataConfiguration {
         DriverManagerDataSource dataSource = new DriverManagerDataSource();
 
         dataSource.setDriverClassName("org.postgresql.Driver");
-        dataSource.setUrl("jdbc:postgresql://localhost:5432/techdatabase");
-        dataSource.setUsername("postgres");
-        dataSource.setPassword("12345");
+        dataSource.setUrl((System.getenv("DB_URL")));
+        dataSource.setUsername((System.getenv("DB_USERNAME")));
+        dataSource.setPassword((System.getenv("DB_PASSWORD")));
 
         // Executa o log exatamente no momento em que o Bean é criado pelo Spring
         try (Connection conn = dataSource.getConnection()) {

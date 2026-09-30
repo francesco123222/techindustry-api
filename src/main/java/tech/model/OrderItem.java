@@ -1,11 +1,10 @@
-package tech.model.order;
+package tech.model;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
 import lombok.*;
 import tech.global.model.GenericBaseModel;
-import tech.model.component.Componente;
 
 import java.math.BigDecimal;
 

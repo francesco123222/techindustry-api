@@ -1,4 +1,4 @@
-package tech.model.user;
+package tech.model;
 
 import jakarta.persistence.PrePersist;
 import jakarta.persistence.PreUpdate;

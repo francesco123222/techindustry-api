@@ -9,7 +9,8 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
-import tech.model.user.User;
+import tech.config.core.UserDetailsImpl;
+import tech.model.User;
 import tech.repository.UserRepository;
 import tech.service.security.TokenService;
 
@@ -37,7 +38,10 @@ public class SecurityFilter extends OncePerRequestFilter {
 
             if (!login.isEmpty()) {
                 userRepository.findByUsuario(login).ifPresent(user -> {
-                    var authentication = new UsernamePasswordAuthenticationToken(user, null, user.getAuthorities());
+                    UserDetailsImpl userDetails = new UserDetailsImpl(user);
+
+                    var authentication = new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
+
                     SecurityContextHolder.getContext().setAuthentication(authentication);
                 });
             }

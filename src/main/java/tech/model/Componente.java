@@ -1,13 +1,14 @@
-package tech.model.component;
+package tech.model;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.*;
 import java.math.BigDecimal;
+
+import tech.enums.TypeComponent;
 import tech.global.model.GenericBaseModel;
-import tech.model.component.enums.AreaComponent;
-import tech.model.component.enums.TypeComponent;
+import tech.enums.AreaComponent;
 
 @NoArgsConstructor
 @AllArgsConstructor

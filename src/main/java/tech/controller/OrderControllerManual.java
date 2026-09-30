@@ -1,4 +1,4 @@
-package tech.controller.models.order;
+package tech.controller.order;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;

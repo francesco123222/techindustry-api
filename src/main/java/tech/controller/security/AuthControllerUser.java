@@ -10,10 +10,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import tech.config.core.UserDetailsImpl;
 import tech.dto.user.LoginRequest;
 import tech.dto.user.TokenResponse;
-import tech.model.user.User;
-import tech.model.user.enums.UserRole;
+import tech.model.User;
+import tech.enums.UserRole;
 import tech.service.security.TokenService;
 
 @Tag(name = "Logar Usuários")
@@ -36,7 +37,8 @@ public class AuthControllerUser {
 
             Authentication authentication = authenticationManager.authenticate(authenticationToken);
 
-            User userLogado = (User) authentication.getPrincipal();
+            UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();
+            User userLogado = (userDetails).getUser();
 
             if (userLogado.getRole() != UserRole.USER) {
                 return ResponseEntity.status(403).body("Acesso negado. Esta área é restrita para usuários.");

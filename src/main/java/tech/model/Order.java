@@ -1,10 +1,10 @@
-package tech.model.order;
+package tech.model;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.*;
 import tech.global.model.GenericBaseModel;
-import tech.model.user.User;
+
 import java.util.List;
 
 import java.time.LocalDateTime;

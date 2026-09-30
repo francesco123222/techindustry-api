@@ -2,7 +2,7 @@ package tech.repository.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
-import tech.model.component.Componente;
+import tech.model.Componente;
 import tech.repository.query.ComponenteRepositoryCustom;
 import tech.utils.component.DatabaseUtils;
 

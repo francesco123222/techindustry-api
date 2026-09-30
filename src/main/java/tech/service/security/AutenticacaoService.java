@@ -4,6 +4,8 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
+import tech.config.core.UserDetailsImpl;
+import tech.model.User;
 import tech.repository.UserRepository;
 
 @Service
@@ -17,7 +19,9 @@ public class AutenticacaoService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        return userRepository.findByUsuario(username)
+       User user = userRepository.findByUsuario(username)
                 .orElseThrow(() -> new UsernameNotFoundException("Usuário não encontrado com o nome: " + username));
+
+       return new UserDetailsImpl(user);
     }
 }

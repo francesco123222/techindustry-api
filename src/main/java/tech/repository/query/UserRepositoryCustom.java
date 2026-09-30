@@ -1,6 +1,6 @@
 package tech.repository.query;
 
-import tech.model.user.User;
+import tech.model.User;
 
 import java.util.List;
 

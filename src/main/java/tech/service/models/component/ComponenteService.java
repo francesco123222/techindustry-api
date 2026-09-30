@@ -8,7 +8,7 @@ import org.springframework.web.server.ResponseStatusException;
 import tech.dto.component.ComponenteRequest;
 import tech.dto.component.ComponenteResponse;
 import tech.global.service.GenericComponenteService;
-import tech.model.component.Componente;
+import tech.model.Componente;
 import tech.repository.ComponenteRepository;
 
 import java.util.ArrayList;

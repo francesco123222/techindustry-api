@@ -1,6 +1,6 @@
 package tech.dto.order;
 
-import tech.model.order.Order;
+import tech.model.Order;
 
 import java.time.LocalDateTime;
 import java.util.List;

@@ -4,7 +4,8 @@ import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import tech.model.user.User;
+import tech.config.core.UserDetailsImpl;
+import tech.model.User;
 
 import java.util.List;
 
@@ -20,6 +21,12 @@ public class DatabaseUtils {
     public static User usuarioLogado() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
-        return (User) authentication.getPrincipal();
+        if (authentication == null || !authentication.isAuthenticated()) {
+            return null;
+        }
+
+        UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();
+
+        return userDetails.getUser();
     }
 }

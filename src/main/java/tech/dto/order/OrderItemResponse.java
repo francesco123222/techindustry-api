@@ -1,7 +1,7 @@
 package tech.dto.order;
 
-import tech.model.order.OrderItem;
-import tech.model.component.enums.TypeComponent;
+import tech.model.OrderItem;
+import tech.enums.TypeComponent;
 
 public record OrderItemResponse(
         Long id,

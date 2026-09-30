@@ -1,4 +1,4 @@
-package tech.model.user;
+package tech.model;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
@@ -6,14 +6,8 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 import lombok.*;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
 import tech.global.model.GenericBaseModel;
-import tech.model.user.enums.UserRole;
-
-import java.util.Collection;
-import java.util.List;
+import tech.enums.UserRole;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -23,7 +17,7 @@ import java.util.List;
 @Entity
 @Table(name = "tb_usuario", schema = "sch_techindustry")
 @EntityListeners(UserListener.class)
-public class User extends GenericBaseModel<Long> implements UserDetails {
+public class User extends GenericBaseModel<Long> {
 
     @NotBlank(message = "O nome de usuário é obrigatório")
     @Size(max = 40)
@@ -48,47 +42,4 @@ public class User extends GenericBaseModel<Long> implements UserDetails {
     @Enumerated(EnumType.STRING)
     @Column(name = "role", length = 30, nullable = false)
     private UserRole role;
-
-
-
-    @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-        if (this.role == UserRole.ADMIN) {
-            return List.of(
-                    new SimpleGrantedAuthority("ROLE_ADMIN"),
-                    new SimpleGrantedAuthority("ROLE_USER")
-            );
-        }
-        return List.of(new SimpleGrantedAuthority("ROLE_USER"));
-    }
-
-    @Override
-    public String getPassword() {
-        return this.senha;
-    }
-
-    @Override
-    public String getUsername() {
-        return this.usuario;
-    }
-
-    @Override
-    public boolean isAccountNonExpired() {
-        return true; // Conta ativa e não expirada
-    }
-
-    @Override
-    public boolean isAccountNonLocked() {
-        return true; // Conta não bloqueada
-    }
-
-    @Override
-    public boolean isCredentialsNonExpired() {
-        return true; // Senha válida e não expirada
-    }
-
-    @Override
-    public boolean isEnabled() {
-        return true; // Usuário habilitado
-    }
 }

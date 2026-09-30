@@ -1,6 +1,6 @@
 package tech.dto.admin;
 
-import tech.model.order.Order;
+import tech.model.Order;
 
 import java.math.BigDecimal;
 import java.util.List;

@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import tech.dto.component.ComponenteRequest;
 import tech.dto.component.ComponenteResponse;
 import tech.global.controller.GenericComponenteController;
-import tech.model.component.Componente;
+import tech.model.Componente;
 import tech.service.models.component.ComponenteService;
 
 import java.util.Collections;

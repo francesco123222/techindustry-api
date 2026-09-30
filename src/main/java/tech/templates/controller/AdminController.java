@@ -8,8 +8,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-import tech.model.component.Componente;
-import tech.model.user.User;
+import tech.model.Componente;
+import tech.model.User;
 import tech.utils.user.DatabaseUtils;
 import tech.utils.user.ValidadorCPF;
 

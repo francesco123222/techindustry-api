@@ -10,7 +10,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import tech.dto.user.AdminRequest;
 import tech.dto.user.UserRequest;
-import tech.model.user.enums.UserRole;
+import tech.enums.UserRole;
 import tech.service.models.user.UserService;
 import tech.utils.user.ValidadorCPF;
 

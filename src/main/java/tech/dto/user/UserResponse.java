@@ -1,7 +1,7 @@
 package tech.dto.user;
 
-import tech.model.user.User;
-import tech.model.user.enums.UserRole;
+import tech.model.User;
+import tech.enums.UserRole;
 
 public record UserResponse (
         Long id,

@@ -9,8 +9,8 @@ import tech.dto.user.UserResponse;
 import tech.global.service.GenericUserService;
 import tech.handler.exception.BusinessException;
 import tech.handler.exception.ResourceNotFoundException;
-import tech.model.user.User;
-import tech.model.user.enums.UserRole;
+import tech.model.User;
+import tech.enums.UserRole;
 import tech.repository.UserRepository;
 
 import java.util.List;

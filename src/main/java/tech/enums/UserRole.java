@@ -1,4 +1,4 @@
-package tech.model.user.enums;
+package tech.enums;
 
 public enum UserRole {
     USER,

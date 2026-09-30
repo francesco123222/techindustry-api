@@ -2,7 +2,7 @@ package tech.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
-import tech.model.user.User;
+import tech.model.User;
 import tech.repository.query.UserRepositoryCustom;
 
 import java.util.List;

@@ -11,8 +11,8 @@ import org.springframework.web.bind.annotation.*;
 import tech.dto.user.UserRequest;
 import tech.dto.user.UserResponse;
 import tech.global.controller.GenericUserController;
-import tech.model.user.User;
-import tech.model.user.enums.UserRole;
+import tech.model.User;
+import tech.enums.UserRole;
 import tech.service.models.user.UserService;
 import tech.utils.user.DatabaseUtils;
 

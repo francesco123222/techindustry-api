@@ -1,8 +1,8 @@
 package tech.templates;
 
 import org.springframework.jdbc.core.JdbcTemplate;
-import tech.model.user.User;
-import tech.model.user.enums.UserRole;
+import tech.model.User;
+import tech.enums.UserRole;
 
 import java.util.List;
 

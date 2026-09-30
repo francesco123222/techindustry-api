@@ -2,7 +2,7 @@ package tech.utils.component;
 
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
-import tech.model.component.Componente;
+import tech.model.Componente;
 
 import java.util.List;
 

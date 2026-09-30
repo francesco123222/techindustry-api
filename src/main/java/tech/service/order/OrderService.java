@@ -1,4 +1,4 @@
-package tech.service.models.order;
+package tech.service.order;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

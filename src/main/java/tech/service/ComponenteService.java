@@ -1,12 +1,10 @@
-package tech.service.models.component;
+package tech.service;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.server.ResponseStatusException;
-import tech.dto.component.ComponenteRequest;
-import tech.dto.component.ComponenteResponse;
+import tech.dto.ComponenteRequest;
+import tech.dto.ComponenteResponse;
 import tech.global.service.GenericComponenteService;
 import tech.model.Componente;
 import tech.repository.ComponenteRepository;

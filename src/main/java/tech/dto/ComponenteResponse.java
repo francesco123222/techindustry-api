@@ -1,4 +1,4 @@
-package tech.dto.component;
+package tech.dto;
 
 import tech.enums.AreaComponent;
 import tech.model.Componente;

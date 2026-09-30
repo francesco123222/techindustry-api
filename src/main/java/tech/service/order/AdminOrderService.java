@@ -1,8 +1,8 @@
-package tech.service.models.order;
+package tech.service.order;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import tech.dto.admin.AdminOrderResponse;
+import tech.dto.AdminOrderResponse;
 import tech.repository.OrderRepository;
 
 import java.util.List;

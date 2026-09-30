@@ -1,4 +1,4 @@
-package tech.dto.admin;
+package tech.dto;
 
 import tech.model.OrderItem;
 

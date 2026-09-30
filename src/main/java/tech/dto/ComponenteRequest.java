@@ -1,4 +1,4 @@
-package tech.dto.component;
+package tech.dto;
 
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;

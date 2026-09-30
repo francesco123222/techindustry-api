@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import tech.dto.order.OrderRequest;
 import tech.dto.order.OrderResponse;
-import tech.service.models.order.OrderService;
+import tech.service.order.OrderService;
 
 @Tag(name = "Comprar Componentes")
 @RestController

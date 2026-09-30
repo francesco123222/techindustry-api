@@ -1,4 +1,4 @@
-package tech.dto.user;
+package tech.dto.token;
 
 public record TokenResponse(
         Long id,

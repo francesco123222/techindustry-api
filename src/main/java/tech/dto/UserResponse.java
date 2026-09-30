@@ -1,4 +1,4 @@
-package tech.dto.user;
+package tech.dto;
 
 import tech.model.User;
 import tech.enums.UserRole;

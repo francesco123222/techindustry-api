@@ -8,10 +8,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-import tech.dto.user.AdminRequest;
-import tech.dto.user.UserRequest;
+import tech.dto.AdminRequest;
+import tech.dto.UserRequest;
 import tech.enums.UserRole;
-import tech.service.models.user.UserService;
+import tech.service.UserService;
 import tech.utils.user.ValidadorCPF;
 
 @Tag(name = "Cadastrar Admnistradores")

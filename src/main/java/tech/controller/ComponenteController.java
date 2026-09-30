@@ -6,11 +6,11 @@ import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-import tech.dto.component.ComponenteRequest;
-import tech.dto.component.ComponenteResponse;
+import tech.dto.ComponenteRequest;
+import tech.dto.ComponenteResponse;
 import tech.global.controller.GenericComponenteController;
 import tech.model.Componente;
-import tech.service.models.component.ComponenteService;
+import tech.service.ComponenteService;
 
 import java.util.Collections;
 import java.util.List;

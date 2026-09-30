@@ -8,12 +8,12 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
-import tech.dto.user.UserRequest;
-import tech.dto.user.UserResponse;
+import tech.dto.UserRequest;
+import tech.dto.UserResponse;
 import tech.global.controller.GenericUserController;
 import tech.model.User;
 import tech.enums.UserRole;
-import tech.service.models.user.UserService;
+import tech.service.UserService;
 import tech.utils.user.DatabaseUtils;
 
 import java.util.List;

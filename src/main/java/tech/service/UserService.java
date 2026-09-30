@@ -1,11 +1,11 @@
-package tech.service.models.user;
+package tech.service;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import tech.dto.user.UserRequest;
-import tech.dto.user.UserResponse;
+import tech.dto.UserRequest;
+import tech.dto.UserResponse;
 import tech.global.service.GenericUserService;
 import tech.handler.exception.BusinessException;
 import tech.handler.exception.ResourceNotFoundException;

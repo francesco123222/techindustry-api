@@ -35,6 +35,7 @@ build/
 ### VS Code ###
 .vscode/
 .env
-
+/src/main/resources/relatorios/**/*.pdf
+/src/main/resources/relatorios/**/*.jrxml
 ### Mac OS ###
 .DS_Store

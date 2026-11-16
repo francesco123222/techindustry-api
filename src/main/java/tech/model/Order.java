@@ -24,10 +24,12 @@ public class Order extends GenericBaseModel<Long> {
     private String dataPedido;
 
     @NotNull
+    @ToString.Exclude
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_usuario", nullable = false)
     private User cliente;
 
+    @ToString.Exclude
     @OneToMany(mappedBy = "pedido", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<OrderItem> itens;
 

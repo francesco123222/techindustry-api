@@ -1,4 +1,4 @@
-package tech.controller.models.user;
+package tech.controller;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;

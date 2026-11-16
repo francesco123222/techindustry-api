@@ -1,5 +1,6 @@
 package tech.dto.order;
 
+import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 
@@ -11,5 +12,6 @@ public record OrderRequest(
         Long idUsuario,
 
         @NotEmpty
+        @Valid
         List<OrderItemRequest> itens
 ) {}

@@ -18,11 +18,13 @@ import java.math.BigDecimal;
 public class OrderItem extends GenericBaseModel<Long> {
 
     @NotNull
+    @ToString.Exclude
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_pedido", nullable = false)
     private Order pedido;
 
     @NotNull
+    @ToString.Exclude
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_componente", nullable = false)
     private Componente componente;
